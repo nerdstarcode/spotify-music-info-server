@@ -82,7 +82,8 @@ export async function authRoutes(app: FastifyInstance) {
       name: user.display_name,
       spotifyID: user.spotifyID,
       urlProfile: spotifyURLs[0].spotify,
-      urlImageProfile: spotifyImages[0].url
+      urlImageProfile: spotifyImages[0].url,
+      auth: auth.access_token
     }, {
       sub: user.id,
       expiresIn: '1 hour'

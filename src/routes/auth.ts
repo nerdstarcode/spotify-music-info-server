@@ -22,7 +22,7 @@ export async function authRoutes(app: FastifyInstance) {
         code: code,
         client_id: process.env.CLIENT_ID,
         grant_type: 'authorization_code',
-        redirect_uri: 'http://localhost:3000/api/auth/callback'
+        redirect_uri: 'http://192.168.1.100:3000/api/auth/callback'
       },
     };
     const auth: SpotifyAuthDTO = await axios.request(authOptions)
@@ -81,8 +81,8 @@ export async function authRoutes(app: FastifyInstance) {
     const token = app.jwt.sign({
       name: user.display_name,
       spotifyID: user.spotifyID,
-      urlProfile: spotifyURLs[0].spotify,
-      urlImageProfile: spotifyImages[0].url,
+      urlProfile: spotifyURLs[0]?.spotify||'/',
+      urlImageProfile: spotifyImages[0]?.url||'/',
       auth: auth.access_token
     }, {
       sub: user.id,
